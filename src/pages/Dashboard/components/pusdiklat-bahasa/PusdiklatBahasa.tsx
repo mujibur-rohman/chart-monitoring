@@ -1,36 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Draggable } from "react-beautiful-dnd";
 import { useContext } from "react";
-import MyResponsiveBar from "../charts/MyResponsiveBar";
-import MyResponsivePie from "../charts/MyResponsivePie";
-import MyResponsiveRadar from "../charts/MyResponsiveRadar";
-import MyResponsiveSunburst from "../charts/MyResponsiveSunburst";
 import { ChartContext, ChartObject } from "../../Dashboard";
 import { useEffect } from "react";
+import ChartRender from "../charts/ChartRender";
 
 const charts: ChartObject[] = [
   {
     id: 1,
-    chart: <MyResponsiveBar />,
+    chart: "bar",
   },
   {
     id: 2,
-    chart: <MyResponsivePie />,
+    chart: "pie",
   },
   {
     id: 3,
-    chart: <MyResponsiveRadar />,
+    chart: "radar",
   },
   {
     id: 4,
-    chart: <MyResponsiveSunburst />,
+    chart: "sunburst",
   },
 ];
 
 const PusdiklatBahasa = () => {
   const { setChartsObject, chartsObject } = useContext(ChartContext);
   useEffect(() => {
-    localStorage.setItem("bahasa", JSON.stringify(charts));
     setChartsObject(charts);
   }, []);
 
@@ -45,7 +41,7 @@ const PusdiklatBahasa = () => {
               {...provided.dragHandleProps}
               ref={provided.innerRef}
             >
-              {item.chart}
+              <ChartRender chart={item.chart} />
             </div>
           )}
         </Draggable>

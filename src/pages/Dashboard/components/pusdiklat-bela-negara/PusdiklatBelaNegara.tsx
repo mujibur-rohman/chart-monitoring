@@ -1,17 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { ChartContext, ChartObject } from "../../Dashboard";
-import MyResponsiveBullet from "../charts/MyResponsiveBullet";
-import MyResponsiveRadialBar from "../charts/MyResponsiveRadialBar";
+import ChartRender from "../charts/ChartRender";
 
 const charts: ChartObject[] = [
   {
     id: 1,
-    chart: <MyResponsiveBullet />,
+    chart: "bullet",
   },
   {
     id: 2,
-    chart: <MyResponsiveRadialBar />,
+    chart: "radialBar",
   },
 ];
 
@@ -32,7 +32,7 @@ const PusdiklatBelaNegara = () => {
               {...provided.dragHandleProps}
               ref={provided.innerRef}
             >
-              {item.chart}
+              <ChartRender chart={item.chart} />
             </div>
           )}
         </Draggable>

@@ -1,17 +1,17 @@
-import MyResponsiveGeo from "../charts/MyResponsiveGeo";
-import MyResponsiveStream from "../charts/MyResponsiveStream";
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { ChartContext, ChartObject } from "../../Dashboard";
+import ChartRender from "../charts/ChartRender";
 
 const charts: ChartObject[] = [
   {
     id: 1,
-    chart: <MyResponsiveGeo />,
+    chart: "geo",
   },
   {
     id: 2,
-    chart: <MyResponsiveStream />,
+    chart: "stream",
   },
 ];
 
@@ -32,7 +32,7 @@ const PusdiklatTekfungham = () => {
               {...provided.dragHandleProps}
               ref={provided.innerRef}
             >
-              {item.chart}
+              <ChartRender chart={item.chart} />
             </div>
           )}
         </Draggable>

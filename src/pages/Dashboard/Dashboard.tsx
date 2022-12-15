@@ -9,7 +9,7 @@ import BoxPusdiklat from "./components/BoxPusdiklat";
 
 export type ChartObject = {
   id: number;
-  chart: JSX.Element;
+  chart: string;
 };
 
 type ChartType = {
