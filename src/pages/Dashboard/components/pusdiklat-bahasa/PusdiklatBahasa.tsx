@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Draggable } from "react-beautiful-dnd";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import MyResponsiveBar from "../charts/MyResponsiveBar";
 import MyResponsivePie from "../charts/MyResponsivePie";
 import MyResponsiveRadar from "../charts/MyResponsiveRadar";
@@ -29,9 +30,9 @@ const charts: ChartObject[] = [
 const PusdiklatBahasa = () => {
   const { setChartsObject, chartsObject } = useContext(ChartContext);
   useEffect(() => {
+    localStorage.setItem("bahasa", JSON.stringify(charts));
     setChartsObject(charts);
   }, []);
-  console.log(chartsObject);
 
   return (
     <>

@@ -1,18 +1,43 @@
 import MyResponsiveGeo from "../charts/MyResponsiveGeo";
 import MyResponsiveStream from "../charts/MyResponsiveStream";
+import React, { useEffect, useContext } from "react";
+import { Draggable } from "react-beautiful-dnd";
+import { ChartContext, ChartObject } from "../../Dashboard";
+
+const charts: ChartObject[] = [
+  {
+    id: 1,
+    chart: <MyResponsiveGeo />,
+  },
+  {
+    id: 2,
+    chart: <MyResponsiveStream />,
+  },
+];
 
 const PusdiklatTekfungham = () => {
+  const { setChartsObject, chartsObject } = useContext(ChartContext);
+  useEffect(() => {
+    setChartsObject(charts);
+  }, []);
+
   return (
-    <div>
-      <div className="grid h-[55vh] grid-cols-2 py-5 gap-5">
-        <div className="bg-white rounded-box">
-          <MyResponsiveGeo />
-        </div>
-        <div className="bg-white rounded-box">
-          <MyResponsiveStream />
-        </div>
-      </div>
-    </div>
+    <>
+      {chartsObject.map((item, index) => (
+        <Draggable draggableId={item.id.toString()} index={index} key={item.id}>
+          {(provided) => (
+            <div
+              className="bg-white rounded-box"
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+            >
+              {item.chart}
+            </div>
+          )}
+        </Draggable>
+      ))}
+    </>
   );
 };
 
