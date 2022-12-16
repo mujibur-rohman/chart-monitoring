@@ -15,17 +15,25 @@ export type ChartObject = {
 type ChartType = {
   setChartsObject: (chart: ChartObject[]) => void;
   chartsObject: ChartObject[];
+  setLocalName: (name: string) => void;
 };
 
 export const ChartContext = React.createContext<ChartType>({
   setChartsObject(chart) {},
   chartsObject: [],
+  setLocalName(name) {},
 });
+
 const Dashboard = () => {
   const [charts, setCharts] = useState<ChartObject[]>([]);
+  const [localName, setLocalName] = useState<string>("");
 
   const setChartToState = (chart: ChartObject[]) => {
     setCharts(chart);
+  };
+
+  const setLocalChartName = (name: string) => {
+    setLocalName(name);
   };
 
   const onDragHandle = (result: DropResult) => {
@@ -37,6 +45,7 @@ const Dashboard = () => {
       items.splice(result.destination.index, 0, reorderedItem);
     }
     setCharts(items);
+    localStorage.setItem(localName, JSON.stringify(items));
     console.log(items);
   };
 
@@ -84,6 +93,7 @@ const Dashboard = () => {
                   value={{
                     setChartsObject: setChartToState,
                     chartsObject: charts,
+                    setLocalName: setLocalChartName,
                   }}
                 >
                   <Outlet />

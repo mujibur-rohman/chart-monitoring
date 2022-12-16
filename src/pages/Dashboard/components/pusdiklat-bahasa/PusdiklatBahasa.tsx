@@ -25,21 +25,22 @@ const charts: ChartObject[] = [
 ];
 
 const PusdiklatBahasa = () => {
-  const { setChartsObject, chartsObject } = useContext(ChartContext);
+  const { setChartsObject, chartsObject, setLocalName } =
+    useContext(ChartContext);
 
   useEffect(() => {
+    const localName = "bahasa";
+    setLocalName(localName);
     // Get data storage
-    const localChart: string | null = localStorage.getItem("bahasa");
-    console.log("RENDER");
+    const localChart: string | null = localStorage.getItem(localName);
     // If there data at storage
     if (localChart) {
       setChartsObject(JSON.parse(localChart));
     } else {
-      localStorage.setItem("bahasa", JSON.stringify(charts));
+      localStorage.setItem(localName, JSON.stringify(charts));
       setChartsObject(charts);
     }
   }, []);
-  console.log(chartsObject);
 
   return (
     <>

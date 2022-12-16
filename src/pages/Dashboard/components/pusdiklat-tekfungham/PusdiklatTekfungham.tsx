@@ -16,9 +16,21 @@ const charts: ChartObject[] = [
 ];
 
 const PusdiklatTekfungham = () => {
-  const { setChartsObject, chartsObject } = useContext(ChartContext);
+  const { setChartsObject, chartsObject, setLocalName } =
+    useContext(ChartContext);
+
   useEffect(() => {
-    setChartsObject(charts);
+    const localName = "tekfungham";
+    setLocalName(localName);
+    // Get data storage
+    const localChart: string | null = localStorage.getItem(localName);
+    // If there data at storage
+    if (localChart) {
+      setChartsObject(JSON.parse(localChart));
+    } else {
+      localStorage.setItem(localName, JSON.stringify(charts));
+      setChartsObject(charts);
+    }
   }, []);
 
   return (
