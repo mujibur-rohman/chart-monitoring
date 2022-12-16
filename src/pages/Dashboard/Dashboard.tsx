@@ -34,14 +34,10 @@ const Dashboard = () => {
     const items = Array(...charts);
     const [reorderedItem] = items.splice(result.source.index, 1);
     if (result?.destination?.index !== undefined) {
-      console.log("SPLICE");
-      console.log(items);
       items.splice(result.destination.index, 0, reorderedItem);
     }
     setCharts(items);
     console.log(items);
-    console.log(result);
-    console.log(reorderedItem);
   };
 
   return (
